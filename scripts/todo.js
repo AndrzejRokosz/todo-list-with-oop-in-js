@@ -8,7 +8,7 @@ class Task{
 
 class ToDoList{
     constructor(){
-        this.tasks=["dfsfds","dwdwdwdw","d23d2d2"]
+        this.tasks=[]
 
         this.render()
     }
@@ -27,8 +27,15 @@ render(){
 
 }
 
+addTaskToList(text){
+    this.tasks.push(new Task(text))
+    this.render()
+}
+
 
 }
 const todo = new ToDoList()
+todo.addTaskToList("ggggg")
+todo.addTaskToList("sdcscsc")
 
 
