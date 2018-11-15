@@ -95,6 +95,8 @@ class ToDoList {
         const input = document.createElement('input')
         const button = document.createElement('button')
         input.className = 'add-task--input'
+        input.autofocus=true
+        input.placeholder='Add/Search Task'
         button.innerText = 'Add task'
 
         button.addEventListener('click', () => this.addTaskToList(input.value))

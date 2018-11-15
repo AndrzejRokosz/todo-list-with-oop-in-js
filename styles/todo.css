@@ -24,11 +24,14 @@
     /* margin:auto; */
     padding:0px;
     /* height:100%; */
-    width:300px;;
+    width:600px;
     font-size:16px;
     cursor: pointer;
 
    
+}
+.task:nth-child(odd) {
+    background-color: rgba(127, 127, 127, 0.1);
 }
 .task--completed{
     text-decoration: line-through;
