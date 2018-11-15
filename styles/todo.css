@@ -1,11 +1,12 @@
 .delete-task-button{
-  background-image: url("/images/x-button.svg");
-  background-position:100% 100%; 
-  background-repeat: no-repeat;
-  width:15px;
-  /* height:auto; */
-  padding:10px;
+    font-weight: bold;
+  color:darkred;
+  padding:5px;
+  font-size: 22;
 
+}
+.delete-task-button:hover{
+    cursor: pointer;
 }
 .todo-list{
     margin:auto;
@@ -14,16 +15,22 @@
 }
 
 
-.list-row{
+.task{
 
     display:flex;
     align-items: center;
     justify-content: space-between;
     /* align-content: space-between; */
     /* margin:auto; */
-    padding:5px;
+    padding:0px;
     /* height:100%; */
     width:300px;;
     font-size:16px;
+    cursor: pointer;
+
    
+}
+.task--completed{
+    text-decoration: line-through;
+    text-decoration-color: green;
 }
