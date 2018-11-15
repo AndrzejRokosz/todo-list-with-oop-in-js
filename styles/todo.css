@@ -1,9 +1,8 @@
 .delete-task-button{
     font-weight: bold;
-  color:darkred;
-  padding:5px;
-  font-size: 22;
-
+    color:darkred;
+    padding:5px;
+    font-size: 22;
 }
 .delete-task-button:hover{
     cursor: pointer;
@@ -11,24 +10,16 @@
 .todo-list{
     margin:auto;
     padding:0px;
-
 }
 
-
 .task{
-
     display:flex;
     align-items: center;
     justify-content: space-between;
-    /* align-content: space-between; */
-    /* margin:auto; */
     padding:0px;
-    /* height:100%; */
     width:600px;
     font-size:16px;
-    cursor: pointer;
-
-   
+    cursor: pointer; 
 }
 .task:nth-child(odd) {
     background-color: rgba(127, 127, 127, 0.1);

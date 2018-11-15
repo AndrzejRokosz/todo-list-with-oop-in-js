@@ -68,6 +68,7 @@ class ToDoList {
         })
         this.selectedHtmlElement.appendChild(ul)
     }
+
     addFilteringButtons() {
         const buttonAllTasks = document.createElement('button')
         const buttonCompletedTasks = document.createElement('button')
@@ -91,6 +92,7 @@ class ToDoList {
         this.selectedHtmlElement.appendChild(buttonCompletedTasks)
         this.selectedHtmlElement.appendChild(buttonTasksToBeDone)
     }
+
     addPromptFormForAddingTasks() {
         const input = document.createElement('input')
         const button = document.createElement('button')
@@ -104,6 +106,7 @@ class ToDoList {
         this.selectedHtmlElement.appendChild(input)
         this.selectedHtmlElement.appendChild(button)
     }
+
     addSearchTaskButton() {
         const searchButton = document.createElement('button')
         searchButton.innerText = 'Search task'
@@ -121,6 +124,7 @@ class ToDoList {
 
         this.selectedHtmlElement.appendChild(searchButton)
     }
+    
     saveTaskInLocalStorage() {
         window.localStorage.setItem("tasks", JSON.stringify(this.tasks))
     }
