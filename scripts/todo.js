@@ -17,6 +17,7 @@ class ToDoList {
     render(chosenTaskArray) {
         this.selectedHtmlElement.innerHTML = ''
         this.addPromptFormForAddingTasks()
+        this.addSearchButton()
         this.addFilteringButtons()
         this.addListWithTasks(chosenTaskArray)
     }
@@ -97,6 +98,14 @@ class ToDoList {
 
         this.selectedHtmlElement.appendChild(input)
         this.selectedHtmlElement.appendChild(button)
+    }
+    addSearchButton(){
+        const searchButton=document.createElement('button')
+        searchButton.innerText='Search task'
+
+        searchButton.addEventListener('click',()=>console.log('clicked'))
+
+        this.selectedHtmlElement.appendChild(searchButton)
     }
     saveTaskInLocalStorage() {
         window.localStorage.setItem("tasks", JSON.stringify(this.tasks))
