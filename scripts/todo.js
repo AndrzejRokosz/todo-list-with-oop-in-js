@@ -10,6 +10,8 @@ class ToDoList {
         this.tasks = JSON.parse(window.localStorage.getItem("tasks")) || []
         this.completed = []
         this.toBeDone = []
+        this.searchedTask = ''
+        this.foundTasks = []
         this.selectedHtmlElement = selectedHtmlElement || document.body
         this.render(this.tasks)
     }
@@ -17,7 +19,7 @@ class ToDoList {
     render(chosenTaskArray) {
         this.selectedHtmlElement.innerHTML = ''
         this.addPromptFormForAddingTasks()
-        this.addSearchButton()
+        this.addSearchTaskButton()
         this.addFilteringButtons()
         this.addListWithTasks(chosenTaskArray)
     }
@@ -92,6 +94,7 @@ class ToDoList {
     addPromptFormForAddingTasks() {
         const input = document.createElement('input')
         const button = document.createElement('button')
+        input.className = 'add-task--input'
         button.innerText = 'Add task'
 
         button.addEventListener('click', () => this.addTaskToList(input.value))
@@ -99,11 +102,20 @@ class ToDoList {
         this.selectedHtmlElement.appendChild(input)
         this.selectedHtmlElement.appendChild(button)
     }
-    addSearchButton(){
-        const searchButton=document.createElement('button')
-        searchButton.innerText='Search task'
+    addSearchTaskButton() {
+        const searchButton = document.createElement('button')
+        searchButton.innerText = 'Search task'
 
-        searchButton.addEventListener('click',()=>console.log('clicked'))
+        searchButton.addEventListener('click', () => {
+            const input = document.querySelector('.add-task--input')
+            this.searchedTask = input.value
+
+            if(this.tasks.length !== 0) {
+                this.foundTasks = this.tasks.filter((task) => 
+                task.text.toLowerCase().trim() ==this.searchedTask.toLowerCase().trim())    
+            }
+            this.render(this.foundTasks)
+        })
 
         this.selectedHtmlElement.appendChild(searchButton)
     }
