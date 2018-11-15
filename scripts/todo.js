@@ -8,15 +8,17 @@ class Task {
 class ToDoList {
     constructor(selectedHtmlElement) {
         this.tasks = []
+        this.completed = []
+        this.toBeDone = []
         this.selectedHtmlElement = selectedHtmlElement || document.body
-        this.render()
+        this.render(this.tasks)
     }
 
-    render() {
+    render(array) {
         this.selectedHtmlElement.innerHTML = ''
         this.addPromptFormForAddingTasks()
         this.addFilteringButtons()
-        this.addListWithTasks()
+        this.addListWithTasks(array)
     }
 
     addTaskToList(text) {
@@ -25,12 +27,12 @@ class ToDoList {
         } else {
             this.tasks.push(new Task(text))
         }
-        this.render()
+        this.render(this.tasks)
     }
-    addListWithTasks() {
+    addListWithTasks(array) {
         const ul = document.createElement('ul')
         ul.className = 'todo-list'
-        this.tasks.forEach((task, taskIndex) => {
+        array.forEach((task, taskIndex) => {
             const li = document.createElement('li')
             const removeTaskButton = document.createElement('div')
             const removeIcon = document.createTextNode("\u00D7")
@@ -46,7 +48,7 @@ class ToDoList {
             removeTaskButton.addEventListener('click', () => {
                 ul.removeChild(li)
                 this.tasks = this.tasks.slice(0, taskIndex).concat(this.tasks.slice(taskIndex + 1, this.tasks.length))
-                this.render()
+                this.render(this.tasks)
             })
 
             removeTaskButton.appendChild(removeIcon)
@@ -68,9 +70,20 @@ class ToDoList {
         buttonCompletedTasks.innerText = 'Completed tasks'
         buttonTasksToBeDone.innerText = 'To be done'
 
-        buttonAllTasks.addEventListener('click', () => console.log('clicked'))
-        buttonCompletedTasks.addEventListener('click', () => console.log('clicked'))
-        buttonTasksToBeDone.addEventListener('click', () => console.log('clicked'))
+        buttonAllTasks.addEventListener('click', () => {
+            const allTasksArray = this.tasks.concat()
+            this.render(this.tasks)
+            console.log(allTasksArray)
+            console.log('clicked')
+        })
+        buttonCompletedTasks.addEventListener('click', () => {
+            this.completed = this.tasks.filter((task) => task.isCompleted === true)
+            this.render(this.completed)
+        })
+        buttonTasksToBeDone.addEventListener('click', () => {
+            this.toBeDone = this.tasks.filter((task) => task.isCompleted === false)
+            this.render(this.toBeDone)
+        })
 
         this.selectedHtmlElement.appendChild(buttonAllTasks)
         this.selectedHtmlElement.appendChild(buttonCompletedTasks)
