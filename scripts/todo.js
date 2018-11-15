@@ -1,30 +1,21 @@
 class Task {
     constructor(text) {
         this.text = text
-
-
         this.isCompleted = false
-       
     }
-
 }
 
-
-
 class ToDoList {
-    constructor() {
-
+    constructor(selectedHtmlElement) {
         this.tasks = []
-       
+        this.selectedHtmlElement = selectedHtmlElement || document.body
         this.render()
     }
 
-
     render() {
+        this.selectedHtmlElement.innerHTML = ''
+        this.promptFormForAddingTasks()
 
-        document.body.innerHTML = ''
-        this.promptFormForAddingTask()
-       
         const ul = document.createElement('ul')
         ul.className = 'todo-list'
         this.tasks.forEach((task, taskIndex) => {
@@ -37,7 +28,7 @@ class ToDoList {
 
             li.addEventListener('click', (event) => {
                 event.target.classList.add('task--completed')
-                task.isCompleted=true
+                task.isCompleted = true
             })
 
             removeTaskButton.addEventListener('click', () => {
@@ -48,44 +39,40 @@ class ToDoList {
 
             removeTaskButton.appendChild(removeIcon)
             li.innerText = task.text
-            if(task.isCompleted){
-                li.style.textDecoration="line-through"
-                li.style.textDecorationColor='green'
+            if (task.isCompleted) {
+                li.style.textDecoration = "line-through"
+                li.style.textDecorationColor = 'green'
             }
-
             li.appendChild(removeTaskButton)
             ul.appendChild(li)
         })
-        document.body.appendChild(ul)
-
+        this.selectedHtmlElement.appendChild(ul)
     }
-
 
     addTaskToList(text) {
         if (text == '' || text == null) {
-            alert("Empty task")
+            alert("It would be too easy for you :)")
         } else {
             this.tasks.push(new Task(text))
-            console.log(this.tasks)
         }
         this.render()
     }
 
-
-    promptFormForAddingTask() {
+    promptFormForAddingTasks() {
         const input = document.createElement('input')
         const button = document.createElement('button')
         button.innerText = 'Add task'
 
         button.addEventListener('click', () => this.addTaskToList(input.value))
-        document.body.appendChild(input)
-        document.body.appendChild(button)
 
+        this.selectedHtmlElement.appendChild(input)
+        this.selectedHtmlElement.appendChild(button)
     }
 
 
 }
-const todo = new ToDoList()
+// const todo = new ToDoList()
+const todo = new ToDoList(document.querySelector('.just-for-testing'))
 
 
 
