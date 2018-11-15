@@ -14,8 +14,20 @@ class ToDoList {
 
     render() {
         this.selectedHtmlElement.innerHTML = ''
-        this.promptFormForAddingTasks()
+        this.addPromptFormForAddingTasks()
+        this.addFilteringButtons()
+        this.addListWithTasks()
+    }
 
+    addTaskToList(text) {
+        if (text == '' || text == null) {
+            alert("It would be too easy for you :)")
+        } else {
+            this.tasks.push(new Task(text))
+        }
+        this.render()
+    }
+    addListWithTasks() {
         const ul = document.createElement('ul')
         ul.className = 'todo-list'
         this.tasks.forEach((task, taskIndex) => {
@@ -48,17 +60,23 @@ class ToDoList {
         })
         this.selectedHtmlElement.appendChild(ul)
     }
+    addFilteringButtons() {
+        const buttonAllTasks = document.createElement('button')
+        const buttonCompletedTasks = document.createElement('button')
+        const buttonTasksToBeDone = document.createElement('button')
+        buttonAllTasks.innerText = 'All tasks'
+        buttonCompletedTasks.innerText = 'Completed tasks'
+        buttonTasksToBeDone.innerText = 'To be done'
 
-    addTaskToList(text) {
-        if (text == '' || text == null) {
-            alert("It would be too easy for you :)")
-        } else {
-            this.tasks.push(new Task(text))
-        }
-        this.render()
+        buttonAllTasks.addEventListener('click', () => console.log('clicked'))
+        buttonCompletedTasks.addEventListener('click', () => console.log('clicked'))
+        buttonTasksToBeDone.addEventListener('click', () => console.log('clicked'))
+
+        this.selectedHtmlElement.appendChild(buttonAllTasks)
+        this.selectedHtmlElement.appendChild(buttonCompletedTasks)
+        this.selectedHtmlElement.appendChild(buttonTasksToBeDone)
     }
-
-    promptFormForAddingTasks() {
+    addPromptFormForAddingTasks() {
         const input = document.createElement('input')
         const button = document.createElement('button')
         button.innerText = 'Add task'
