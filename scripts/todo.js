@@ -97,8 +97,8 @@ class ToDoList {
         const input = document.createElement('input')
         const button = document.createElement('button')
         input.className = 'add-task--input'
-        input.autofocus=true
-        input.placeholder='Add/Search Task'
+        input.autofocus = true
+        input.placeholder = 'Add/Search Task'
         button.innerText = 'Add task'
 
         button.addEventListener('click', () => this.addTaskToList(input.value))
@@ -115,23 +115,37 @@ class ToDoList {
             const input = document.querySelector('.add-task--input')
             this.searchedTask = input.value
 
-            if(this.tasks.length !== 0) {
-                this.foundTasks = this.tasks.filter((task) => 
-                task.text.toLowerCase().trim() ==this.searchedTask.toLowerCase().trim())    
+            if (this.searchedTask !== "") {
+                if (this.tasks.length !== 0) {
+                    this.foundTasks = this.tasks.filter((task) => (
+                        task.text
+                            .toLowerCase()
+                            .replace(/\s/g, '')
+                            .normalize('NFD')
+                            .replace(/[\u0300-\u036f]/g, "")
+                            .includes(
+                                this.searchedTask
+                                    .toLowerCase()
+                                    .replace(/\s/g, '')
+                                    .normalize('NFD')
+                                    .replace(/[\u0300-\u036f]/g, "")
+                            )
+                    ))
+                    
+                } this.render(this.foundTasks)
             }
-            this.render(this.foundTasks)
         })
 
         this.selectedHtmlElement.appendChild(searchButton)
     }
-    
+
     saveTaskInLocalStorage() {
         window.localStorage.setItem("tasks", JSON.stringify(this.tasks))
     }
 
 }
 const todo = new ToDoList()
-// const todo = new ToDoList(document.querySelector('.just-for-testing'))
+
 
 
 
